@@ -7,7 +7,70 @@
 </head>
 <body>
     <div class="container">
-        
+        <header class="header">
+            <h1>To Do!</h1>
+            <form class="addProject">
+              <label class="createTitle">Create a Project</label>
+              <input type="text" class="projectName" name="project" placeholder="Project Description">
+              <button class="addProButton">Add Project</button>
+          </form>
+            <form class="addTodo">
+                <label class="textAdd">Add a new todo</label>
+                <input type="text" class="todoName" name="todo" placeholder="Todo Description">
+                <label class="textAdd">Priority</label>
+                <select id="priori" name="priority">
+                    <option value="red">High</option>
+                    <option value="orange">Medium</option>
+                    <option value="green">Low</option>
+                  </select>
+                  <label class="textAdd">Project</label>
+                  <select id="whichProject" name="whichProject">
+                    <option value="portfolio">Portfolio</option>
+                  
+                  </select>
+                  <input type="text" class="noteText" name="note" placeholder="Notes">
+                <button class="addTodoButton">Add Todo!</button>
+            </form>
+<div class="yourProjects">Your projects: Portfolio</div>
+            <label class="filterProject">Filter Projects</label>
+            <input type="text" class="todoName" name="todo" placeholder="Projects">
+
+        </header>
+       
+        <div class="globalTodos">
+          <div class="first">
+              <h3 label class="lists">To do </h3>
+              <div class="projectHash">#Portfolio
+                 <div class="todo">
+                <div class="red">.</div>
+                <div class="single">Play mariokart
+                  <button id="change" >Change</button>
+                  <button id="delete">Delete</button>
+                  <input id="toggle" type="checkbox">
+                </div>
+             </div>
+          </div>
+        </div>
+          <div class="second">
+            <h3 label class="lists">Doing </h3>
+            
+          </div>
+          <div class="third">
+            <h3 label class="lists">Done </h3>
+            <div class="projectHash">#Portfolio
+                <div class="todo">
+                    <div class="red">.</div>
+                    <div class="single">Buy milk
+                      <button id="change" >Change</button>
+                      <button id="delete">Delete</button>
+                      <input id="toggle" type="checkbox">
+                    </div>
+                    <div class="note">Lorem ipsum fisting agapur lorem ipsum fisting agapur lorem ipsum fisting agapur  </div>
+
+                  </div>
+                </div>
+        </div>
+        </div>
     </div>
     <script src="main.js"></script>
 </body>

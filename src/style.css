@@ -1,0 +1,156 @@
+body {
+    background-color: aqua;
+    margin: auto;
+    padding: 10px;
+}
+
+/* header */
+
+.header{
+    padding: 0px 10px 0px 10px;
+margin-bottom: 3em;
+}
+
+h1{
+    font-size: 70px;
+    padding: 0px 10px 0px 10px;
+    color:rgb(14, 12, 12)
+}
+
+button{
+    height: 3em;
+    border-radius: 20px;
+    background-color: rgb(255, 187, 0);
+    border: none;
+}
+
+.addTodo{
+    padding: 10px;
+}
+
+.addProject{
+    padding: 10px;
+}
+
+.filterProject{
+    padding: 10px;
+}
+
+.yourProjects{
+    padding: 10px;
+}
+
+
+
+/*Single todo display*/
+.projectHash {
+    border: 2px solid rgb(236, 27, 114);
+    background-color: rgb(241, 184, 241);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.single{
+width: 35%;
+display: inline;
+}
+
+.todo{
+    margin-top: 1em;
+    text-align: left;
+}
+#change{
+    height: 1.5em;
+    font-size: 12px;
+    background-color: rgb(102, 37, 224);
+    color: white;
+    margin-left: 18%;
+  
+
+}
+#delete{
+    height: 1.5em;
+    font-size: 12px;
+    background-color: rgb(241, 10, 68);
+    color: white;
+    margin-left: 5px;
+}
+#toggle{
+  
+    height: 1.5em;
+    color: white;
+    margin-left: 5px;
+    height: 10px;
+}
+
+
+/* Priorities */
+.red{
+text-align: center;
+width: 20px;
+color:red;
+border-radius: 50%;
+background-color: red;
+display: inline-block;
+}
+.orange{
+text-align: center;
+width: 20px;
+color:rgb(255, 115, 0);
+border-radius: 50%;
+background-color: rgb(255, 115, 0);
+display: inline-block;
+}
+.green{
+text-align: center;
+width: 20px;
+color:rgb(16, 230, 16);
+border-radius: 50%;
+background-color: rgb(16, 230, 16);
+display: inline-block;
+        }
+
+
+
+
+
+
+/*display divs*/
+
+.globalTodos{
+    height: 300px;
+    height: 50vh;
+    display: flex;
+}
+.globalTodos > div {
+    flex: 1; /*grow*/
+  }
+
+.first{
+   border-radius: 10px;
+   padding: 10px;
+   display: inline-block;
+   height: 50vh;
+   margin-right: 1em;
+   background-color: royalblue;
+}
+
+.second{
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    height: 50vh;
+    margin-right: 1em;
+    background-color: rgb(123, 149, 226);
+}
+
+.third{
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    height: 50vh;
+    background-color: rgb(192, 203, 235);
+
+}
+
+
