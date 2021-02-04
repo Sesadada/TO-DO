@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
     <title>To Do!</title>
 </head>
 <body>
@@ -25,16 +26,19 @@
                   </select>
                   <label class="textAdd">Project</label>
                   <select id="whichProject" name="whichProject">
-                    <option value="portfolio">Portfolio</option>
                   
                   </select>
                   <input type="text" class="noteText" name="note" placeholder="Notes">
                 <button class="addTodoButton">Add Todo!</button>
             </form>
-<div class="yourProjects">Your projects: Portfolio</div>
-            <label class="filterProject">Filter Projects</label>
-            <input type="text" class="todoName" name="todo" placeholder="Projects">
+<div class="yourProjects" >Your projects: </div>
+<div class="projectDes">
+  <input type="text" class="proDes" name="project" >
 
+  <button id="changePro" >Change Project Name</button>
+  <button id="deletePro">Delete Project</button>
+</div>
+ 
         </header>
        
         <div class="globalTodos">
@@ -46,7 +50,6 @@
                 <div class="single">Play mariokart
                   <button id="change" >Change</button>
                   <button id="delete">Delete</button>
-                  <input id="toggle" type="checkbox">
                 </div>
              </div>
           </div>
@@ -63,7 +66,6 @@
                     <div class="single">Buy milk
                       <button id="change" >Change</button>
                       <button id="delete">Delete</button>
-                      <input id="toggle" type="checkbox">
                     </div>
                     <div class="note">Lorem ipsum fisting agapur lorem ipsum fisting agapur lorem ipsum fisting agapur  </div>
 
