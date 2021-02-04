@@ -24,6 +24,13 @@ button{
     border: none;
 }
 
+.projectButton{
+    height: 2.5em;
+    border-radius: 20px;
+    background-color: rgb(123, 245, 41);
+    border: none;
+}
+
 .addTodo{
     padding: 10px;
 }
@@ -64,7 +71,7 @@ display: inline;
     font-size: 12px;
     background-color: rgb(102, 37, 224);
     color: white;
-    margin-left: 18%;
+    margin-left: 15%;
   
 
 }
@@ -75,14 +82,24 @@ display: inline;
     color: white;
     margin-left: 5px;
 }
-#toggle{
-  
-    height: 1.5em;
-    color: white;
-    margin-left: 5px;
-    height: 10px;
+
+
+/* project display change delete */
+
+.projectDes {
+display: none;
+padding: 10px;
+}
+#changePro{
+    background-color: pink;
+}
+#deletePro{
+    background-color: pink;
 }
 
+input:focus::placeholder {
+    color: transparent;
+  }
 
 /* Priorities */
 .red{
