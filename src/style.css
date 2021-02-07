@@ -51,10 +51,13 @@ button{
 
 /*Single todo display*/
 .projectHash {
+    margin-top: 10px;
     border: 2px solid rgb(236, 27, 114);
     background-color: rgb(241, 184, 241);
     border-radius: 20px;
     padding: 10px;
+    cursor: move;
+    position: relative;
 }
 
 .single{
@@ -66,7 +69,10 @@ display: inline;
     margin-top: 1em;
     text-align: left;
 }
-#change{
+.notes {
+    margin-top: 10px;
+}
+.change{
     height: 1.5em;
     font-size: 12px;
     background-color: rgb(102, 37, 224);
@@ -75,12 +81,17 @@ display: inline;
   
 
 }
-#delete{
+.delete{
     height: 1.5em;
     font-size: 12px;
     background-color: rgb(241, 10, 68);
     color: white;
     margin-left: 5px;
+}
+
+.inputStyle{
+    margin-left: 10px;
+    width: 130px;    
 }
 
 
@@ -143,7 +154,7 @@ display: inline-block;
     flex: 1; /*grow*/
   }
 
-.first{
+#first{
    border-radius: 10px;
    padding: 10px;
    display: inline-block;
@@ -152,7 +163,7 @@ display: inline-block;
    background-color: royalblue;
 }
 
-.second{
+#second{
     padding: 10px;
     border-radius: 10px;
     display: inline-block;
@@ -161,7 +172,7 @@ display: inline-block;
     background-color: rgb(123, 149, 226);
 }
 
-.third{
+#third{
     padding: 10px;
     border-radius: 10px;
     display: inline-block;
@@ -169,5 +180,8 @@ display: inline-block;
     background-color: rgb(192, 203, 235);
 
 }
+
+
+
 
 
