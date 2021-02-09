@@ -1,9 +1,11 @@
 import {projectList, todoList, clicked} from "./index.js"
-import { changingStatus } from "./render.js"
-
+import {renderingPro, renderingMultPro} from "./render.js"
+import {Project} from "./factories.js"
+import { el } from "date-fns/locale"
 const inputPro = document.querySelector(".proDes")
 const proDisplay = document.querySelector(".projectDes")
-const empties = document.querySelectorAll(".empty")
+const whichProject = document.querySelector("#whichProject")
+const yourProjects = document.querySelector(".yourProjects")
 
 //updates todo when changing the project
 const updatingTodo = (arr, but) => {
@@ -26,9 +28,8 @@ const updatingTodo = (arr, but) => {
         });
     return arr
 }
-
+//updates project list appended on index.html
 const changingPro = (arr, but) => {
-
     const multi = document.querySelectorAll(".multi")
     const multiarr = [...multi]
     arr.forEach((element, index) => {
@@ -63,12 +64,12 @@ const updatingTodoDel = (arr, but) => {
             arr.splice(index,1) 
             }   
         });
-    console.log(arr)
     return arr
 }
 
-
 const deletingPro = (arr, but) => {
+    const divs = Array.from(document.querySelectorAll(".projectHash"))
+
     const multi = document.querySelectorAll(".multi")
     const multiarr = [...multi]
         arr.forEach((element, index) => {
@@ -81,6 +82,7 @@ const deletingPro = (arr, but) => {
             }
         });
         proDisplay.style.display = "none"
+        divs.forEach(d => {d.style.display = "block"})
         clicked = 0
         return arr
 }
@@ -94,64 +96,94 @@ const deletingTodo = (arr, todo) => {
             todo.parentNode.removeChild(todo)  //remove fisic div 
         }
     });
-    
     return arr 
 
 }
 
-const changingTodo = () => {
 
+//changes status when dropping todo
+const dragDropping = todo => {
+    const whichTodo = document.querySelectorAll(".projectHash")
+    const empties = document.querySelectorAll(".empty")
+    whichTodo.forEach(todo => {
+      todo.addEventListener("dragstart", () => {
+        setTimeout(() => todo.classList.add("dragging"), 0)   
+      })
+      todo.addEventListener("dragend", () => {
+        todo.classList.remove("dragging")
+      })
+    })
+    empties.forEach(em => {
+      em.addEventListener("dragover", e => {
+        e.preventDefault()
+        const draggable = document.querySelector(".dragging")
+        em.appendChild(draggable)
+        const storage = JSON.parse(localStorage.getItem("todoList"))
+        for (const obj of storage){
+            if(obj.description == draggable.id){
+                if(em.id == "second"){
+                    obj.status = "doing"
+                } else if(em.id == "third"){
+                    obj.status = "done"
+                } else if(em.id == "first"){
+                    obj.status = "to do"
+                }
+                localStorage.setItem("todoList", JSON.stringify(storage))
+            }
+        }
+      })
+    }) 
 }
 
-const dragDrop = (todo) => {
-    todo.addEventListener("dragstart", dragStart)
-    todo.addEventListener("dragend", dragEnd)
+const updatingTodo = (oldP, newP) => {
+    const todoStorage = JSON.parse(localStorage.getItem("todoList"))
+    todoStorage.forEach(e => {
+        if(e.project === oldP && e.description === this.id){
+            e.project = newP
+            sub.setAttribute("data", `${newP}`)
+            console.log(this)
+            console.log(e)
+            if(!projectList.includes(newP)){
+                const newPro = Project(newP)
+                projectList.push(newPro.getName())
+                renderingPro(newPro.getName(), yourProjects)
+                renderingMultPro(newPro.getName(), whichProject)
+                console.log(projectList)
+                //localStorage.setItem("projectList", JSON.stringify(projectList))
 
-    function dragStart(){
-        setTimeout(() => (this.style.display = "none"), 0)
-      }
-      
-      function dragEnd() {
-        this.style.display = "block"
-      }
+            }
+        }
+    })
+}
 
-for (const em of empties){
-    em.addEventListener("dragover", dragOver)
-    em.addEventListener("drop", dragDrop)
-  }
+//changes todo when writing directly in todo and enter is pressed
+const changingTodo = (e) => {
+  const sub = e.target
+  console.log(e.target)
+  sub.setAttribute("contenteditable", "true")
+  const todo = e.target.textContent
+  let regex;
+  let contenteditable = document.querySelector('[contenteditable]')
+  let texto = contenteditable.textContent;
+  console.log(texto)
 
-    function dragOver(e) {
-      e.preventDefault()
-  }
-  
-    function dragDrop() {
-      this.appendChild(todo)
-      const storage = JSON.parse(localStorage.getItem("todoList"))
-      for (const obj of storage){
-          if(obj.description == todo.id){
-              console.log(this.id)
-              if(this.id == "second"){
-                  obj.status = "doing"
-              } else if(this.id == "third"){
-                  obj.status = "done"
-              } else if(this.id == "first"){
-                  obj.status = "to do"
-              }
-              //changingStatus(obj.status)
-              console.log(obj)
-              console.log(storage)
-              localStorage.setItem("todoList", JSON.stringify(storage))
 
-          }
-      }
-      //localStorage.setItem("todoList", JSON.stringify(final))
-
-  }
+  sub.addEventListener('keyup', function(e) {
+      console.log(e.target.textContent)
+        if (e.key === 'Enter') {       
+    if(todo[0] == "#"){
+        regex = /\..*$/
+        let lastProject = todo.replace(regex,"").slice(1)
+        let newProject = sub.textContent.replace(regex,"").slice(1);
+        updatingTodo(lastProject, newProject)
+        //localStorage.setItem("todoList", JSON.stringify(todoStorage))
+        sub.removeAttribute("contenteditable", "true")
+    } 
+    
+    }
+      });
 }
 
 
+export {changingPro, deletingPro, deletingTodo, updatingTodo, updatingTodoDel, dragDropping, changingTodo}
 
-
-
-
-export {changingPro, deletingPro, deletingTodo, updatingTodo, updatingTodoDel, dragDrop}

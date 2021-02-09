@@ -58,6 +58,10 @@ button{
     padding: 10px;
     cursor: move;
     position: relative;
+    caret-color: blue;
+}
+.projectHash.dragging {
+    opacity: .5;
 }
 
 .single{

@@ -1,47 +1,41 @@
 //function render to the DOM
 import {deletingTodo, changingTodo} from "./modifyPro.js"
-import {clicked, todoList} from "./index.js"
+import {clicked} from "./index.js"
 
 const proDisplay = document.querySelector(".projectDes")
 const inputPro = document.querySelector(".proDes")
 
-
 const renderingPro = (pro, div) => {
-        const newButt = document.createElement("button")
-        newButt.classList.add("projectButton")
-        newButt.textContent = pro
-        div.appendChild(newButt)
-        newButt.addEventListener("click", (e) => {
-          const divs = Array.from(document.querySelectorAll(".projectHash"))
-            if(newButt.style.backgroundColor == "pink"){
-                proDisplay.style.display = "none"
-                newButt.style.backgroundColor = `rgb(${123}, ${245}, ${41})`
-                clicked = 0
-                divs.forEach(d => {
-                  if(d.getAttribute("data") != pro){
-                  d.style.display = "block"
-                  } 
-                inputPro.value = ""
-              })
-            } else if(clicked != 1){
-            newButt.style.backgroundColor = "pink"
-            proDisplay.style.display = "block"
-            inputPro.setAttribute("placeholder", `${newButt.textContent}`)
-            inputPro.value = ""
-            clicked = 1  
-            divs.forEach(d => {
-              console.log(d.getAttribute("data"))
-              console.log(pro)
-                if(d.getAttribute("data") != newButt.textContent){
-                d.style.display = "none"
-                } 
-            })
-            //filter? const chosen = buttons.filter(b => b.innerHTML == inputPro.value)
-            }
-          })  
+  const newButt = document.createElement("button")
+  newButt.classList.add("projectButton")
+  newButt.textContent = pro
+  div.appendChild(newButt)
+  newButt.addEventListener("click", (e) => {
+    const divs = Array.from(document.querySelectorAll(".projectHash"))
+    if(newButt.style.backgroundColor == "pink"){
+      proDisplay.style.display = "none"
+      newButt.style.backgroundColor = `rgb(${123}, ${245}, ${41})`
+      clicked = 0
+      divs.forEach(d => {
+        if(d.getAttribute("data") != pro){
+          d.style.display = "block"
+          } 
+        inputPro.value = ""
+      })
+    } else if(clicked != 1){
+        newButt.style.backgroundColor = "pink"
+        proDisplay.style.display = "block"
+        inputPro.setAttribute("placeholder", `${newButt.textContent}`)
+        inputPro.value = ""
+        clicked = 1  
+        divs.forEach(d => {
+          if(d.getAttribute("data") != newButt.textContent){
+            d.style.display = "none"
+          } 
+        })
+      }
+  })  
 }
-
-
 
 const renderingMultPro = (pro, div) => {
     let opt = document.createElement('option');
@@ -68,26 +62,46 @@ const changingStatus = (status) => {
 
 
 const renderingTodo = (todo) => {
-
     const todoGen = document.createElement("div")
     todoGen.setAttribute("draggable", "true")
     todoGen.setAttribute("id", todo.description)
     todoGen.setAttribute('data', todo.project)
     todoGen.classList.add("projectHash")
     todoGen.textContent = `#${todo.project}`
-
     const todoInner = document.createElement("div")
     todoInner.classList.add("todo")
     const circle = document.createElement("div")
     circle.textContent = "."
     circle.classList.add(`${todo.priority}`)
     todoInner.appendChild(circle)
-    
     const todoText = document.createElement("div")
     todoText.classList.add("single")
     todoText.textContent = todo.description
+    
+    const deleteBtn = document.createElement("button")
+    deleteBtn.classList.add("delete")
+    deleteBtn.textContent = "Delete"
+    deleteBtn.setAttribute('data', todo.description)
+    deleteBtn.addEventListener("click", (e) => {
+      const storage = JSON.parse(localStorage.getItem("todoList"))
+      const final = deletingTodo(storage, todoGen)
+      localStorage.setItem("todoList", JSON.stringify(final))
+    }) 
+    const note = document.createElement("div")
+    note.classList.add("notes")
+    note.textContent = `Notes: ${todo.notes}`
+    todoText.appendChild(deleteBtn)
+    todoText.appendChild(note)
+    todoInner.appendChild(todoText)
+    todoGen.appendChild(todoInner)
+    
+    todoGen.addEventListener("dblclick", changingTodo)
+    changingStatus(todo.status).appendChild(todoGen)
+}
 
-    /*
+export {renderingPro, renderingMultPro, renderingTodo, changingStatus}
+
+/*
     todoText.addEventListener("click", (e) => {
       const inp = document.createElement("input")
       inp.classList.add("inputStyle")
@@ -118,36 +132,3 @@ const renderingTodo = (todo) => {
 
     })
     */ // to delete todo
-    const deleteBtn = document.createElement("button")
-    deleteBtn.classList.add("delete")
-    deleteBtn.textContent = "Delete"
-    deleteBtn.setAttribute('data', todo.description)
-    deleteBtn.addEventListener("click", (e) => {
-      const storage = JSON.parse(localStorage.getItem("todoList"))
-      const final = deletingTodo(storage, todoGen)
-      localStorage.setItem("todoList", JSON.stringify(final))
-
-    }) // to delete todo
-    const note = document.createElement("div")
-    note.classList.add("notes")
-    note.textContent = `Notes: ${todo.notes}`
-    //note.setAttribute("contenteditable", "true")
-    //todoText.appendChild(changeBtn)
-    todoText.appendChild(deleteBtn)
-    todoText.appendChild(note)
-    
-    todoInner.appendChild(todoText)
-    todoGen.appendChild(todoInner)
-
-    changingStatus(todo.status).appendChild(todoGen)
-    
-
-}
-
-
-
-
-
-
-export {renderingPro, renderingMultPro, renderingTodo, changingStatus}
-
