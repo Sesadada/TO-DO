@@ -1,5 +1,5 @@
 //function render to the DOM
-import {deletingTodo, changingTodo} from "./modifyPro.js"
+import {deletingTodo, changingTodo, dragDropping} from "./modifyPro.js"
 import {clicked} from "./index.js"
 
 const proDisplay = document.querySelector(".projectDes")
@@ -94,7 +94,7 @@ const renderingTodo = (todo) => {
     todoText.appendChild(note)
     todoInner.appendChild(todoText)
     todoGen.appendChild(todoInner)
-    
+
     todoGen.addEventListener("dblclick", changingTodo)
     changingStatus(todo.status).appendChild(todoGen)
 }

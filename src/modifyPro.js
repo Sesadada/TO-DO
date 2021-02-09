@@ -107,7 +107,7 @@ const dragDropping = todo => {
     const empties = document.querySelectorAll(".empty")
     whichTodo.forEach(todo => {
       todo.addEventListener("dragstart", () => {
-        setTimeout(() => todo.classList.add("dragging"), 0)   
+        todo.classList.add("dragging")
       })
       todo.addEventListener("dragend", () => {
         todo.classList.remove("dragging")
