@@ -139,32 +139,58 @@ const dragDropping = todo => {
 
 //changes todo when writing directly in todo and enter is pressed
 const changingTodo = (e) => {
-  const sub = e.target
-  console.log(e.target.textContent)
-  sub.setAttribute("contenteditable", "true")
-  const todo = e.target.textContent
+  e.preventDefault()
   let regex;
-   /*
-  sub.addEventListener("input", (e)=> {
-      console.log("hello")
-  })
-  */
-  sub.addEventListener('keyup', function(e) {
-      console.log(sub.textContent)
-        if (e.key === 'Enter') {       
-    if(todo[0] == "#"){
+  const sub = e.target
+  const todo = e.target.textContent
+  
+  if (todo === "."){
+    sub.setAttribute("contenteditable", "false")
+    console.log(sub)
+    const todoStorage = JSON.parse(localStorage.getItem("todoList"))
+    const oldP = sub.classList
+    const divDes = sub.parentNode.parentNode.id
+    const divPro = sub.parentNode.parentNode.getAttribute("data")
+    console.log("oldP " + oldP)
+    console.log("div description", divDes)
+    console.log("div pro", divPro)
+
+
+    todoStorage.forEach(e => {
+        if(e.priority == oldP && e.project == divPro && e.description === divDes){
+            if(oldP == "orange") {
+            sub.classList = "red"
+            e.priority = "red"
+        } else if(oldP == "red"){
+            sub.classList = "green"
+            e.priority = "green"
+        } else if(oldP == "green"){
+            sub.classList = "orange"
+            e.priority = "orange"
+        }
+    }
+    })
+    localStorage.setItem("todoList", JSON.stringify(todoStorage))
+
+  } else {
+    sub.setAttribute("contenteditable", "true")
+
+  
+  
+  sub.addEventListener('keydown', function(e) {
+
+    if (e.which === 13) {  
+      e.preventDefault()
+
+      if(todo[0] == "#"){
         regex = /\..*$/
         let oldP = todo.replace(regex,"").slice(1)
-        console.log(oldP)
         let newP = sub.textContent.replace(regex,"").slice(1);
-        console.log(newP)
         const todoStorage = JSON.parse(localStorage.getItem("todoList"))
         todoStorage.forEach(e => {
             if(e.project === oldP && e.description === this.id){
                 e.project = newP
                 sub.setAttribute("data", `${newP}`)  
-                console.log("sub", sub)
-                console.log(e)  
                 if(!projectList.includes(newP)){
                     const newPro = Project(newP)
                     projectList.push(newPro.getName())
@@ -177,44 +203,45 @@ const changingTodo = (e) => {
         })
         sub.removeAttribute("contenteditable", "true")
 
-    } else if (todo.includes("DeleteNotes:")){
-        regex = /DeleteNotes:.*$/
+    } else if (todo.includes("Delete")){
+        regex = /Delete.*$/
         const oldDes = todo.replace(regex, "")
         const newDes = sub.textContent.replace(regex, "")
         const todoStorage = JSON.parse(localStorage.getItem("todoList"))
         todoStorage.forEach(e => {
             if(e.description === oldDes && e.project === this.parentNode.parentNode.getAttribute("data")){
                 e.description = newDes}
-
             })
-            console.log(todoStorage)
           localStorage.setItem("todoList", JSON.stringify(todoStorage))
           sub.removeAttribute("contenteditable", "true")
 
         
-    } else if (todo[0] == "N"){
-        regex = /Notes:/
-        const oldN = todo.replace(regex, "").slice(1)
-        const newN = sub.textContent.replace(regex, "").slice(1)
+    } else if (todo == "..." || !todo.includes("Delete" || todo != ".")){
+       
+        const oldN = todo
+        const newN = sub.textContent
         console.log(oldN)
         console.log(newN)
         const todoStorage = JSON.parse(localStorage.getItem("todoList"))
         todoStorage.forEach(e => {
-            console.log(e.notes)
-            if(e.notes === oldN && e.project === this.parentNode.parentNode.parentNode.getAttribute("data")){
-                console.log(sub.parentNode.parentNode.parentNode)
-                e.notes = newN}
+            console.log("e.notes",e.notes)
+            console.log("old notes",oldN)
+            console.log(this.parentNode.parentNode.parentNode.parentNode.id)
+            if((e.notes === oldN || e.notes == "" ) && e.description === this.parentNode.parentNode.parentNode.parentNode.id){
+                console.log("old notes",oldN)
+                console.log("new", newN)
+                console.log("e.notes",e.notes)
 
+                e.notes = newN}
             })
-            console.log(todoStorage)
           localStorage.setItem("todoList", JSON.stringify(todoStorage))
           sub.removeAttribute("contenteditable", "true")
-
+// && e.project === this.parentNode.parentNode.parentNode.getAttribute("data")
 
     }
-    
     }
       });
+    }
 }
 
 

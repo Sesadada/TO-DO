@@ -89,7 +89,11 @@ const renderingTodo = (todo) => {
     }) 
     const note = document.createElement("div")
     note.classList.add("notes")
-    note.textContent = `Notes: ${todo.notes}`
+    const sp = document.createElement("span")
+    sp.setAttribute("class","mergecode test1")
+    sp.textContent = todo.notes == "" ? "..." : `${todo.notes}`
+    //note.textContent = `${todo.notes}`
+    note.append(sp)
     todoText.appendChild(deleteBtn)
     todoText.appendChild(note)
     todoInner.appendChild(todoText)
@@ -101,34 +105,4 @@ const renderingTodo = (todo) => {
 
 export {renderingPro, renderingMultPro, renderingTodo, changingStatus}
 
-/*
-    todoText.addEventListener("click", (e) => {
-      const inp = document.createElement("input")
-      inp.classList.add("inputStyle")
-      todoText.appendChild(inp)
-      //todoText.style.display = "none"
-      
-    })
-    */
 
-    //todoText.setAttribute("contenteditable", "true")
-     /*
-     const changeBtn = document.createElement("button")
-    
-    changeBtn.classList.add("change")
-    changeBtn.textContent = "Change"
-    changeBtn.setAttribute('data', todo.description)
-   
-    changeBtn.addEventListener("click", (e) => {
-      const newDes = document.createElement("input")
-      newDes.setAttribute("placeholder",`Change Description`)
-      const newText = document.createElement("input")
-      newText.setAttribute("placeholder", `Change Notes`)
-      todoText.appendChild(newDes)
-      todoGen.appendChild(newText)
-      const storage = JSON.parse(localStorage.getItem("todoList"))
-      const final = changingTodo(storage, todoGen)
-      //localStorage.setItem("todoList", JSON.stringify(final))
-
-    })
-    */ // to delete todo

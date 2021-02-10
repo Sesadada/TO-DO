@@ -47,6 +47,14 @@ button{
     padding: 10px;
 }
 
+.mergecode::before { 
+    font-family:inherit;
+    font-size:inherit;
+    font-weight:inherit;
+    padding: 2px 4px;
+    display:inline-block; }
+
+.mergecode.test1::before { content:"Notes:" }
 
 
 /*Single todo display*/

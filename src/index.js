@@ -1,6 +1,6 @@
 import css from "./style.css";
 import { formatDistance, subDays } from 'date-fns'
-import {renderingPro, renderingMultPro, renderingTodo, dragDropping} from "./render.js"
+import {renderingPro, renderingMultPro, renderingTodo} from "./render.js"
 import {createNewProject, createNewTodo} from "./createNew.js"
 import {changingPro, deletingPro, updatingTodo, updatingTodoDel, dragDropping} from "./modifyPro.js"
 
