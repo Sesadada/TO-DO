@@ -100,7 +100,8 @@ const renderingTodo = (todo) => {
     todoGen.appendChild(todoInner)
 
     todoGen.addEventListener("dblclick", changingTodo)
-    changingStatus(todo.status).appendChild(todoGen)
+    todo.priority == "red"? changingStatus(todo.status).prepend(todoGen) : todo.priority == "green" ? changingStatus(todo.status).append(todoGen): changingStatus(todo.status).appendChild(todoGen)
+    //changingStatus(todo.status).appendChild(todoGen)
 }
 
 export {renderingPro, renderingMultPro, renderingTodo, changingStatus}

@@ -117,7 +117,13 @@ const dragDropping = todo => {
       em.addEventListener("dragover", e => {
         e.preventDefault()
         const draggable = document.querySelector(".dragging")
-        em.appendChild(draggable)
+        //dragColor == "red"? em.prepend(todoGen) : dragColor == "green" ? em.append(todoGen): em.appendChild(todoGen)
+        
+        const dragColor = draggable.lastElementChild.firstChild.getAttribute("class")
+        console.log(dragColor)
+        //em.appendChild(draggable)
+        dragColor == "red"? em.prepend(draggable) : dragColor == "green" ? em.append(draggable): em.appendChild(draggable)
+
         const storage = JSON.parse(localStorage.getItem("todoList"))
         for (const obj of storage){
             if(obj.description == draggable.id){
