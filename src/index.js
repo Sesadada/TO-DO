@@ -93,6 +93,8 @@ if(storage != null ){
   }
 
 dragDropping()
+
+console.log("Gatito")
   
 export {projectList, todoList, clicked, flag}
 
