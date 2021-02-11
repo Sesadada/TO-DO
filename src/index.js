@@ -34,11 +34,15 @@ changePro.addEventListener("click", () => {
   const buttons = Array.from(document.querySelectorAll(".projectButton"))
   const [chosen] = buttons.filter(b => b.style.backgroundColor == "pink")
   storage = JSON.parse(localStorage.getItem("projectList"))
+  if(todoList.length !== 0) {
   todoStorage = JSON.parse(localStorage.getItem("todoList"))
   const finalTodo = updatingTodo(todoStorage, chosen)
+  localStorage.setItem("todoList", JSON.stringify(finalTodo))
+}
+  
   const final = changingPro(storage, chosen)
   localStorage.setItem("projectList", JSON.stringify(final))
-  localStorage.setItem("todoList", JSON.stringify(finalTodo))
+  
   }
 })
 
