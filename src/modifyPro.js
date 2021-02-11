@@ -160,8 +160,6 @@ const changingTodo = (e) => {
     console.log("oldP " + oldP)
     console.log("div description", divDes)
     console.log("div pro", divPro)
-
-
     todoStorage.forEach(e => {
         if(e.priority == oldP && e.project == divPro && e.description === divDes){
             if(oldP == "orange") {
@@ -179,12 +177,111 @@ const changingTodo = (e) => {
     localStorage.setItem("todoList", JSON.stringify(todoStorage))
 
   } else {
-    sub.setAttribute("contenteditable", "true")
-
-  
-  
+  sub.setAttribute("contenteditable", "true")
   sub.addEventListener('keydown', function(e) {
+    if (e.which === 13) {  
+      e.preventDefault()
 
+      if(todo[0] == "#"){
+        regex = /\..*$/
+        let oldP = todo.replace(regex,"").slice(1)
+        let newP = sub.textContent.replace(regex,"")
+        newP = newP[0] != "#"? newP : newP.slice(1);
+        const todoStorage = JSON.parse(localStorage.getItem("todoList"))
+        todoStorage.forEach(e => {
+            if(e.project === oldP && e.description === this.id){
+                e.project = newP
+                sub.setAttribute("data", `${newP}`)  
+                if(!projectList.includes(newP)){
+                    const newPro = Project(newP)
+                    projectList.push(newPro.getName())
+                    renderingPro(newPro.getName(), yourProjects)
+                    renderingMultPro(newPro.getName(), whichProject)
+                    localStorage.setItem("projectList", JSON.stringify(projectList))
+                }
+            localStorage.setItem("todoList", JSON.stringify(todoStorage))
+            }
+        })
+        sub.removeAttribute("contenteditable", "true")
+
+    } else if (todo.includes("Delete")){
+        regex = /Delete.*$/
+        const oldDes = todo.replace(regex, "")
+        const newDes = sub.textContent.replace(regex, "")
+        const todoStorage = JSON.parse(localStorage.getItem("todoList"))
+        todoStorage.forEach(e => {
+            if(e.description === oldDes && e.project === this.parentNode.parentNode.getAttribute("data")){
+                e.description = newDes}
+            })
+          localStorage.setItem("todoList", JSON.stringify(todoStorage))
+          sub.removeAttribute("contenteditable", "true")
+
+        
+    } else if (todo == "..." || !todo.includes("Delete" || todo != ".")){
+        const oldN = todo
+        const newN = sub.textContent
+        console.log(oldN)
+        console.log(newN)
+        const todoStorage = JSON.parse(localStorage.getItem("todoList"))
+        todoStorage.forEach(e => {
+            console.log("e.notes",e.notes)
+            console.log("old notes",oldN)
+            console.log(this.parentNode.parentNode.parentNode.parentNode.id)
+            if((e.notes === oldN || e.notes == "" ) && e.description === this.parentNode.parentNode.parentNode.parentNode.id){
+                console.log("old notes",oldN)
+                console.log("new", newN)
+                console.log("e.notes",e.notes)
+                e.notes = newN}
+            })
+          localStorage.setItem("todoList", JSON.stringify(todoStorage))
+          sub.removeAttribute("contenteditable", "true")
+
+    }
+    }
+      });
+    }
+}
+
+
+export {changingPro, deletingPro, deletingTodo, updatingTodo, updatingTodoDel, dragDropping, changingTodo}
+
+/*
+//changes todo when writing directly in todo and enter is pressed
+const changingTodo = (e) => {
+  e.preventDefault()
+  let regex;
+  const sub = e.target
+  const todo = e.target.textContent
+  
+  if (todo === "."){
+    sub.setAttribute("contenteditable", "false")
+    console.log(sub)
+    const todoStorage = JSON.parse(localStorage.getItem("todoList"))
+    const oldP = sub.classList
+    const divDes = sub.parentNode.parentNode.id
+    const divPro = sub.parentNode.parentNode.getAttribute("data")
+    console.log("oldP " + oldP)
+    console.log("div description", divDes)
+    console.log("div pro", divPro)
+    todoStorage.forEach(e => {
+        if(e.priority == oldP && e.project == divPro && e.description === divDes){
+            if(oldP == "orange") {
+            sub.classList = "red"
+            e.priority = "red"
+        } else if(oldP == "red"){
+            sub.classList = "green"
+            e.priority = "green"
+        } else if(oldP == "green"){
+            sub.classList = "orange"
+            e.priority = "orange"
+        }
+    }
+    })
+    localStorage.setItem("todoList", JSON.stringify(todoStorage))
+
+  } else {
+  sub.setAttribute("contenteditable", "true")
+  sub.addEventListener('keydown', function(e) {
     if (e.which === 13) {  
       e.preventDefault()
 
@@ -223,7 +320,6 @@ const changingTodo = (e) => {
 
         
     } else if (todo == "..." || !todo.includes("Delete" || todo != ".")){
-       
         const oldN = todo
         const newN = sub.textContent
         console.log(oldN)
@@ -237,12 +333,10 @@ const changingTodo = (e) => {
                 console.log("old notes",oldN)
                 console.log("new", newN)
                 console.log("e.notes",e.notes)
-
                 e.notes = newN}
             })
           localStorage.setItem("todoList", JSON.stringify(todoStorage))
           sub.removeAttribute("contenteditable", "true")
-// && e.project === this.parentNode.parentNode.parentNode.getAttribute("data")
 
     }
     }
@@ -251,5 +345,4 @@ const changingTodo = (e) => {
 }
 
 
-export {changingPro, deletingPro, deletingTodo, updatingTodo, updatingTodoDel, dragDropping, changingTodo}
-
+*/

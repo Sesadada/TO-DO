@@ -25,7 +25,8 @@ button{
 }
 
 .projectButton{
-    height: 2.5em;
+    margin-right: 10px;
+    height: 3em;
     border-radius: 20px;
     background-color: rgb(123, 245, 41);
     border: none;
@@ -41,12 +42,14 @@ button{
 
 .filterProject{
     padding: 10px;
+    
 }
 
-.yourProjects{
+.yourProjects, .priorities{
     padding: 10px;
 }
 
+/* Notes */
 .mergecode::before { 
     font-family:inherit;
     font-size:inherit;
@@ -61,7 +64,7 @@ button{
 .projectHash {
     margin-top: 10px;
     border: 2px solid rgb(236, 27, 114);
-    background-color: rgb(241, 184, 241);
+    background-color: rgb(241, 194, 223);
     border-radius: 20px;
     padding: 10px;
     cursor: move;
@@ -73,8 +76,11 @@ button{
 }
 
 .single{
-width: 35%;
-display: inline;
+    font-weight: bold;
+
+   
+    width: 35%;
+    display: inline;
 }
 
 .todo{
@@ -82,23 +88,19 @@ display: inline;
     text-align: left;
 }
 .notes {
+    font-weight:normal;
+
+    font-style: italic;
+
     margin-top: 10px;
 }
-.change{
-    height: 1.5em;
-    font-size: 12px;
-    background-color: rgb(102, 37, 224);
-    color: white;
-    margin-left: 15%;
-  
 
-}
 .delete{
-    height: 1.5em;
+    height: 1.6em;
     font-size: 12px;
-    background-color: rgb(241, 10, 68);
+    background-color: rgb(10, 45, 241);
     color: white;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .inputStyle{
@@ -113,6 +115,7 @@ display: inline;
 display: none;
 padding: 10px;
 }
+
 #changePro{
     background-color: pink;
 }
@@ -132,6 +135,7 @@ color:red;
 border-radius: 50%;
 background-color: red;
 display: inline-block;
+margin-right: 10px;
 }
 .orange{
 text-align: center;
@@ -140,6 +144,7 @@ color:rgb(255, 115, 0);
 border-radius: 50%;
 background-color: rgb(255, 115, 0);
 display: inline-block;
+margin-right: 10px;
 }
 .green{
 text-align: center;
@@ -148,6 +153,7 @@ color:rgb(16, 230, 16);
 border-radius: 50%;
 background-color: rgb(16, 230, 16);
 display: inline-block;
+margin-right: 10px;
         }
 
 

@@ -1,6 +1,6 @@
 import css from "./style.css";
 import { formatDistance, subDays } from 'date-fns'
-import {renderingPro, renderingMultPro, renderingTodo} from "./render.js"
+import {renderingPro, renderingMultPro, renderingTodo, filterPrio} from "./render.js"
 import {createNewProject, createNewTodo} from "./createNew.js"
 import {changingPro, deletingPro, updatingTodo, updatingTodoDel, dragDropping} from "./modifyPro.js"
 
@@ -8,6 +8,7 @@ import {changingPro, deletingPro, updatingTodo, updatingTodoDel, dragDropping} f
 
 const yourProjects = document.querySelector(".yourProjects")
 const addProButton = document.querySelector(".addProButton")
+const inputPro = document.querySelector(".proDes")
 const addTodoButton = document.querySelector(".addTodoButton")
 const whichProject = document.querySelector("#whichProject")
 const changePro = document.querySelector("#changePro")
@@ -17,6 +18,7 @@ const todoList = []
 const projectList = []
 let clicked;
 let storage;
+let flag = 0
 //localStorage.setItem("projectList", JSON.stringify(projectList))
 //localStorage.setItem("todoList", JSON.stringify(todoList))
 
@@ -28,6 +30,7 @@ addProButton.addEventListener("click", (e) => {
 })
 
 changePro.addEventListener("click", () => {
+  if(inputPro.value !== ""){
   const buttons = Array.from(document.querySelectorAll(".projectButton"))
   const [chosen] = buttons.filter(b => b.style.backgroundColor == "pink")
   storage = JSON.parse(localStorage.getItem("projectList"))
@@ -36,6 +39,7 @@ changePro.addEventListener("click", () => {
   const final = changingPro(storage, chosen)
   localStorage.setItem("projectList", JSON.stringify(final))
   localStorage.setItem("todoList", JSON.stringify(finalTodo))
+  }
 })
 
 deletePro.addEventListener("click", (e) => {
@@ -71,6 +75,16 @@ const renderAllTodos = (arrLocalS, original) => {
   })
 }
 
+const prio = document.querySelectorAll(".prio")
+prio.forEach(p => {
+  //if(flag == 0){
+  p.addEventListener("click", filterPrio)
+  //}
+  
+})
+
+
+
 todoStorage = JSON.parse(localStorage.getItem("todoList"))
 storage = JSON.parse(localStorage.getItem("projectList"))
 if(storage != null ){
@@ -80,7 +94,7 @@ if(storage != null ){
 
 dragDropping()
   
-export {projectList, todoList, clicked}
+export {projectList, todoList, clicked, flag}
 
 
 

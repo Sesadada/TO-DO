@@ -1,9 +1,11 @@
 //function render to the DOM
-import {deletingTodo, changingTodo, dragDropping} from "./modifyPro.js"
-import {clicked} from "./index.js"
+import {deletingTodo, changingTodo} from "./modifyPro.js"
+import {clicked, flag} from "./index.js"
 
 const proDisplay = document.querySelector(".projectDes")
 const inputPro = document.querySelector(".proDes")
+
+
 
 const renderingPro = (pro, div) => {
   const newButt = document.createElement("button")
@@ -92,7 +94,6 @@ const renderingTodo = (todo) => {
     const sp = document.createElement("span")
     sp.setAttribute("class","mergecode test1")
     sp.textContent = todo.notes == "" ? "..." : `${todo.notes}`
-    //note.textContent = `${todo.notes}`
     note.append(sp)
     todoText.appendChild(deleteBtn)
     todoText.appendChild(note)
@@ -104,6 +105,26 @@ const renderingTodo = (todo) => {
     //changingStatus(todo.status).appendChild(todoGen)
 }
 
-export {renderingPro, renderingMultPro, renderingTodo, changingStatus}
+const filterPrio = (e) => {
+  console.log("1", flag)
+  const divs = Array.from(document.querySelectorAll(".projectHash"))
+  if(flag == 0){
+  divs.forEach(d => {
+    if(d.lastElementChild.firstElementChild.classList!= e.target.classList[0]){
+      d.style.display = "none"
+      flag = 1
+    } 
+    
+  })
+} else if(flag == 1){
+  divs.forEach(d => {
+      d.style.display = "block"
+      flag = 0
+    
+})
+  console.log(flag)
+}
+}
+export {renderingPro, renderingMultPro, renderingTodo, changingStatus, filterPrio}
 
 
